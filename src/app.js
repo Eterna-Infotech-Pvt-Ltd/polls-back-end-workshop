@@ -1,0 +1,10 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const app = express();
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(express.json());
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/polls", require("./routes/polls"));
+app.get("/health", (_, res) => res.json({ ok: true }));
+module.exports = app;
